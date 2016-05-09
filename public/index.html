@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+    <h1>Einkaufszettel</h1>
+
+    <fieldset>
+        <legend>Füge einen Artikel hinzu:</legend>
+        <input type="text" ng-model="formData.amount" placeholder="Menge"><br/>
+        <input type="text" ng-model="formData.description" placeholder="Artikel"><br/>
+        <button type="button" ng-click="addShoppingItem()">Hinzufügen</button>
+    </fieldset>
+
+    <button type="button" ng-click="testSearch()">Search</button>
+
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>
+                Menge
+            </th>
+            <th>
+                Artikel
+            </th>
+            <th>
+
+            </th>
+        </tr>
+        </thead>
+        <tr ng-repeat="x in shoppingList">
+            <td>
+                {{ x.amount}}
+            </td>
+            <td>
+                {{ x.description }}
+            </td>
+            <td>
+                <button type="button" ng-click="removeItem($index)">Löschen</button>
+            </td>
+
+        </tr>
+        <script src="app.js"></script>
+        <script src="ctrl.js"></script>
+
+</table>
+</div>
+</body>
+
+</html>
