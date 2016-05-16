@@ -1,37 +1,51 @@
 /**
  * Created by kathi on 08.05.16.
+ * AMAZON
  */
+var trim = require('trim');
+var queryString = require('querystring');
+var syncRequest = require('sync-request');
 
-var fs = require('fs');
-var request = require("request");
-//var fileName = "/Users/kathi/WebstormProjects/shoppingList/test.htm";
+module.exports = {
+    apiSearch: apiSearch
+};
 
-var keyWord = 'milch';
-var searchURL = 'http://www.amazon.de/s/ref=nb_sb_noss_2?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&url=search-alias%3Daps&field-keywords='+keyWord;
+function apiSearch(keyWord) {
+    var searchURL = 'http://www.amazon.de/s/ref=nb_sb_noss_2?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&url=search-alias%3Daps&field-keywords='+ queryString.escape(keyWord);
 
-request({
-    uri: searchURL
-}, function(error, response, body) {
-    getInformation(body);
-});
+    var result = {
+        log: '',
+        status: 0,
+        itemInformation: []
+    };
+
+    var response = "";
+
+    try {
+        response = syncRequest('GET', searchURL);
+    } catch (err) {
+        result.status = -1;
+        return result;
+    }
+
+    return getInformation(response.getBody('utf8'), keyWord);
+}
 
 //returns dataObject with information about the 5 first items that were found on amazon.de
-function getInformation(htmlString) {
+function getInformation(htmlString, keyWord) {
     var dataObject = {
-        log: '',
+        log: 'Amazon: ' + keyWord,
         status: 0,
         itemInformation: []
     };
     //var contents = fs.readFileSync(htmlString).toString();
     var cheerio = require('cheerio'), $ = cheerio.load(htmlString);
-
     //find all items with a special class
     var result = $('#atfResults').find('li.s-result-item');
     //trim array to first 5 search results
     var items = result.splice(0, 5);
 
     $(items).each(function(index,content){
-        console.log(content);
         var tempItem = {
             title: $('h2', content).text(),
             price: $('.a-link-normal .a-color-price.s-price', content).text(),
@@ -40,7 +54,6 @@ function getInformation(htmlString) {
         dataObject.itemInformation.push(tempItem);
     });
 
-    console.log(JSON.stringify(dataObject));
     return dataObject;
 
     //TEST LOG ===============================================================
