@@ -3,6 +3,7 @@
  */
 var searchApi = require('./combinedsearch');
 
-var results = searchApi.search('mehl');
+var results = searchApi.search('shampoo');
 
 console.log(JSON.stringify(results,0,2));
+
