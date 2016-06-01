@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    md-content
+        md-toolbar
+            div(class='md-toolbar-tools')
+                h2 Listie McListFace
+                span(flex)
+                md-button(class='md-fab md-accent md-mini', aria-label='Add something')
+                    md-icon(md-svg-src='assets/img/shoppingcard.svg')
+        div(layout="row" layout-align="center")
+            div(flex=70)
+                div(ui-view)
+    script(src='../assets/lib/jquery/dist/jquery.min.js')
+    script(src='../assets/lib/bootstrap/dist/js/bootstrap.js')
+
+    script(src='../assets/lib/angular/angular.min.js')
+    script(src='../assets/lib/angular-ui-router/release/angular-ui-router.min.js')
+    script(src='../assets/lib/angular-animate/angular-animate.min.js')
+    script(src='../assets/lib/angular-aria/angular-aria.min.js')
+    script(src='../assets/lib/angular-messages/angular-messages.min.js')
+    script(src='../assets/lib/angular-material/angular-material.min.js')
+    script(src='../app/app.js')
+    script(src='../app/main/main.js')
+    script(src='../app/main/main.controller.js')

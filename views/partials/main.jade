@@ -1,0 +1,26 @@
+md-card
+    md-card-content
+        md-content
+            pre {{vm.newItem}}
+            form(name="inputForm")
+                md-autocomplete(
+                    md-selected-item="ctrl.selectedItem",
+                    md-search-text-change="ctrl.searchTextChange(ctrl.searchText)",
+                    md-search-text="ctrl.searchText",
+                    md-selected-item-change="ctrl.selectedItemChange(item)",
+                    md-items="item in ctrl.querySearch(ctrl.searchText)",
+                    md-item-text="item.display",
+                    md-min-length="0",
+                )
+                div(layout="row")
+                    md-input-container(class="md-block")
+                        label Unit
+                        input(required, md-no-asterisk, name="unit", ng-model="vm.newItem.unit")
+                        div(ng-messages="inputForm.name.$error")
+                            div(ng-message="required") Du musst schon was eintragen, Junge
+
+                    md-input-container(class="md-block")
+                        label Unit
+                        input(required, md-no-asterisk, name="unit", ng-model="vm.newItem.unit")
+                        div(ng-messages="inputForm.name.$error")
+                            div(ng-message="required") Du musst schon was eintragen, Junge
