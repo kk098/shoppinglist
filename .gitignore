@@ -48,3 +48,4 @@ fabric.properties
 
 node_modules
 public/assets/lib
+npm-debug.log

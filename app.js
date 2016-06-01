@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 mongoose.connect('mongodb://localhost/shoppingList');
 
 app.use('/', routes);
-app.get('/partials/:name', routes)
+app.get('/partials/:name', routes);
 
 // delete later
 app.use('/users', users);
@@ -74,6 +74,5 @@ app.use(function(err, req, res, next) {
   });
 });
 
-console.log(JSON.stringify(searchApi.search('shampoo'),0,2));
 
 module.exports = app;

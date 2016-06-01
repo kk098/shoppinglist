@@ -2,6 +2,12 @@ md-card
     md-card-content
         md-content
             pre {{vm.newItem}}
+            md-input-container(class="md-block")
+                label Suche
+                input(required, md-no-asterisk, name="Suche", ng-model="vm.searchString")
+                div(ng-messages="inputForm.name.$error")
+                    div(ng-message="required") Du musst schon was eintragen, Junge
+            md-button(ng-click="vm.post()") Post
             form(name="inputForm")
                 md-autocomplete(
                     md-selected-item="ctrl.selectedItem",
@@ -24,3 +30,5 @@ md-card
                         input(required, md-no-asterisk, name="unit", ng-model="vm.newItem.unit")
                         div(ng-messages="inputForm.name.$error")
                             div(ng-message="required") Du musst schon was eintragen, Junge
+
+            pre {{vm.result}}
