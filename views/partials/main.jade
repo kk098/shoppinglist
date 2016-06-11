@@ -12,7 +12,7 @@ md-card
                             div(ng-message="min") Die Zahl muss mindestens 1 sein.
                     md-input-container(flex="60")
                         label Suche
-                        input(required, name="name", ng-model="vm.searchPara.name")
+                        input(required, autocomplete, name="name", ng-model="vm.searchPara.name")
                         div(ng-messages="inputForm.name.$error")
                             div(ng-message="required") Du musst schon was eintragen, Junge.
                     md-input-container(flex="20")
@@ -23,14 +23,5 @@ md-card
                             div(ng-message="required") Du musst schon was eintragen, Junge.
                 div(layout="row")
                     md-input-container
-                        input(type="submit", class="md-block md-button md-raised md-primary" value="Ich finde das mal schnell")
+                        input(type="submit", aria-label="Submit" class="md-block md-button md-raised md-primary" value="Ich finde das mal schnell")
             pre {{vm.result}}
-            md-autocomplete(
-                md-selected-item="ctrl.selectedItem",
-                md-search-text-change="ctrl.searchTextChange(ctrl.searchText)",
-                md-search-text="ctrl.searchText",
-                md-selected-item-change="ctrl.selectedItemChange(item)",
-                md-items="item in ctrl.querySearch(ctrl.searchText)",
-                md-item-text="item.display",
-                md-min-length="0",
-            )

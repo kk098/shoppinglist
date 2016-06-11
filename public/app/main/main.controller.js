@@ -4,7 +4,9 @@ angular
     .module('listieMcListface')
     .controller('MainController', MainController);
 
-function MainController($log, $http) {
+MainController.$inject = ['$http', '$log', 'dataservice'];
+
+function MainController($http, $log, dataservice) {
     $log.debug('MainController loaded');
     var vm = this;
 
@@ -18,7 +20,7 @@ function MainController($log, $http) {
         {name: "Liter", value:"l"},
         {name: "Pack", value:"p"}
     ];
-
+    
     vm.post = function(form) {
         vm.submitted = true;
 
