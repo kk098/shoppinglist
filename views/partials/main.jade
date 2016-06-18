@@ -25,3 +25,13 @@ md-card
                     md-input-container
                         input(type="submit", aria-label="Submit" class="md-block md-button md-raised md-primary" value="Ich finde das mal schnell")
             pre {{vm.result}}
+            md-input-container
+                label Searchables
+                input(ng-model="vm.searchable")
+                md-button(ng-click="vm.postSearchable()")
+                    span Save
+
+            pre {{vm.post}}
+
+            md-button(ng-click="vm.dataService()")
+                span service

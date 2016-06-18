@@ -1,3 +1,8 @@
+(function () {
+    'use strict';
+
+})();
+
 angular
     .module('listieMcListface')
     .factory('dataservice', dataservice);
@@ -6,20 +11,34 @@ dataservice.$inject = ['$http', '$log'];
 
 function dataservice($http, $log) {
     return {
-        getBaseProducts: getBaseProducts
+        getSearchables: getSearchables,
+        getMatching: getMatching
     };
 
-    function getBaseProducts() {
-        return ['bill', 'james', 'dingdong'];
-        return $http.get('/api/baseproducts')
-            .then(getBaseProductsComplete)
-            .catch(getBaseProductsFailed);
+    function getSearchables() {
+        return $http.get('/api/searchables')
+            .then(getSearchablesComplete)
+            .catch(getSearchablesFailed);
 
-        function getBaseProductsComplete(response) {
-            return response.data.results;
+        function getSearchablesComplete(res) {
+            return res.data;
         }
 
-        function getBaseProductsFailed(error) {
+        function getSearchablesFailed(error) {
+            $log.error('XHR Failed for getAvengers.' + error.data);
+        }
+    }
+    
+    function getMatching(string) {
+        return $http.get('/api/searchables/' + string)
+            .then(getMatchingComplete)
+            .catch(getMatchingFailed);
+
+        function getMatchingComplete(res) {
+            return res.data;
+        }
+
+        function getMatchingFailed(error) {
             $log.error('XHR Failed for getAvengers.' + error.data);
         }
     }
