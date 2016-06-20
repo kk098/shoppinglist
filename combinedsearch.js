@@ -5,8 +5,10 @@ var searchRewe = require('./searchReweApi');
 var searchAmazon = require('./searchAmazonApi');
 var searchLebensmittel = require('./searchLebensmittelApi');
 
+// define module exports
+// given functions are accessible from outside the module
 module.exports = {
-    search: function(keyword) {
+    search: function(keyword) { // synchronously fetch results from each known search api and return those combined results
         var results = [
             searchRewe.apiSearch(keyword),
             searchAmazon.apiSearch(keyword),
