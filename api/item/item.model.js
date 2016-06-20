@@ -15,22 +15,26 @@ var ItemSchema = new Schema({
         rewe: [{
             title: String,
             price: Number,
-            ppu: String
+            ppu: String,
+            link: String
         }],
         amazon: [{
             title: String,
             price: Number,
-            ppu: String
+            ppu: String,
+            link: String
         }],
         lebensmittel: [{
             title: String,
             price: Number,
-            ppu: String
+            ppu: String,
+            link: String
         }],
         custom: [{
             title: String,
             price: Number,
-            ppu: String
+            ppu: String,
+            link: String
         }]
     }
 });

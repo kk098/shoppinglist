@@ -1,4 +1,3 @@
-{{vm.top}}
-md-chips
-    md-chip-template(ng-repeat="chip in vm.top", md-theme="default", flex)
-        strong {{chip.name}}
+md-chips(ng-model="vm.top" readonly="true")
+    md-chip-template(ng-click="vm.chipClick($chip)")
+        strong {{$chip.name}}

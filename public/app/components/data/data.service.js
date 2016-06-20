@@ -3,7 +3,7 @@
 
     angular
         .module('listieMcListface')
-        .factory('dataservice', dataservice);
+        .factory('data', dataservice);
 
     dataservice.$inject = ['$http', '$log'];
 
@@ -43,7 +43,22 @@
         }
 
         function getTop(string) {
-            return $http.get('/api/searchables/' + string)
+            return [
+                {count: 3, name: "Milch"},
+                {count: 32, name: "Kartoffeln"},
+                {count: 2, name: "Bier"},
+                {count: 6, name: "Brot"},
+                {count: 9, name: "Mandeln"},
+                {count: 3, name: "Milch"},
+                {count: 32, name: "Kartoffeln"},
+                {count: 2, name: "Bier"},
+                {count: 6, name: "Brot"},
+                {count: 9, name: "Mandeln"},
+                {count: 2, name: "Apfel"},
+                {count: 7, name: "Dings"},
+                {count: 33, name: "Uran"}
+            ];
+            return $http.get('/api/items/top')
                 .then(getComplete)
                 .catch(getFailed);
 

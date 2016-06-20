@@ -13,6 +13,18 @@ exports.index = function(req, res) {
     });
 };
 
+exports.top = function(req, res) {
+    Item
+        .find()
+        .sort({ count: 'asc' })
+        .limit(15)
+        .exec(function (err, items) {
+            if (err) { return handleError(res, err); }
+
+            return res.status(200).json(items);
+        });
+};
+
 exports.create = function(req, res) {
     console.log(req.body);
     

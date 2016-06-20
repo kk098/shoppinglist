@@ -5,9 +5,9 @@
         .module('listieMcListface')
         .directive('autocomplete', autocomplete);
 
-    autocomplete.$inject = ['$timeout', 'dataservice', '$parse', '$http', '$interpolate'];
+    autocomplete.$inject = ['$timeout', 'data', '$parse', '$http', '$interpolate'];
 
-    function autocomplete($timeout, dataservice, $parse, $http, $interpolate) {
+    function autocomplete($timeout, data, $parse, $http, $interpolate) {
         /**
          * @desc autocomplete directive
          * @example <div autocomplete things="vm.model"></div>
@@ -33,7 +33,7 @@
                 iElement.autocomplete({
                     source: function (request, response) {
 
-                        dataservice.getMatching(request.term).then(function (res) {
+                        data.getMatching(request.term).then(function (res) {
                             mappedItems = $.map(res, function (item) {
                                 var result = {};
 

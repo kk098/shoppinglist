@@ -5,13 +5,14 @@
         .module('listieMcListface')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['$http', '$log', 'dataservice'];
+    MainController.$inject = ['$http', '$log', 'data'];
 
-    function MainController($http, $log, dataservice) {
+    function MainController($http, $log, data) {
         $log.debug('MainController loaded');
         var vm = this;
 
         vm.submitted = false;
+        vm.showResult = false;
         vm.newItem = {};
         vm.searchPara = {
             amount: 1,
@@ -25,16 +26,11 @@
             {name: "Pack", value:"p"}
         ];
         vm.result = [];
-        vm.top = [
-            {count: 3, name: "Milch"},
-            {count: 32, name: "Kartoffeln"},
-            {count: 2, name: "Bier"},
-            {count: 6, name: "Brot"},
-            {count: 9, name: "Mandeln"},
-            {count: 2, name: "Apfel"},
-            {count: 7, name: "Dings"},
-            {count: 33, name: "Uran"}
-        ];
+        vm.top = data.getTop();
+
+        vm.chipClick = function (item) {
+            vm.searchPara.name = item.name;
+        };
 
         vm.post = function(form) {
             vm.submitted = true;
@@ -42,12 +38,17 @@
             if(form.$valid) {
                 $http.post('/api/items', {searchString: vm.searchPara.name}).then(function(res) {
                     vm.result = res.data;
+                    vm.showResult = true;
                 });
             }
         };
 
         vm.getVendor = function (string) {
           return string.split(": ")[0];
+        };
+
+        vm.saveItem = function () {
+          console.log(vm.result);
         };
 
         //TODO: remove when searchable crawler finished
