@@ -7,6 +7,10 @@ var ItemSchema = new Schema({
     name: String,
     amount: Number,
     unit: String,
+    count: {
+        type: Number,
+        default: 1
+    },
     info: {
         rewe: [{
             title: String,

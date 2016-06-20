@@ -8,6 +8,10 @@ var SearchableSchema = new Schema({
     category: {
         type: String,
         default: "uncategorized"
+    },
+    count: {
+        type: Number,
+        default: 1
     }
 });
 

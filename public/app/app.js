@@ -7,8 +7,6 @@
             $urlRouterProvider.otherwise('/');
     
             $locationProvider.html5Mode(true);
-    
-            console.log("hello");
         });
 
 })();

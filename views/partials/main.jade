@@ -10,6 +10,8 @@ md-card
                         div(ng-messages="inputForm.amount.$error")
                             div(ng-message="required") Du musst schon was eintragen, Junge.
                             div(ng-message="min") Die Zahl muss mindestens 1 sein.
+                        //div(layout="row" layout-xs="column")
+                        include chip
                     md-input-container(flex="60")
                         label Suche
                         input(required, autocomplete, name="name", ng-model="vm.searchPara.name")
@@ -24,7 +26,10 @@ md-card
                 div(layout="row")
                     md-input-container
                         input(type="submit", aria-label="Submit" class="md-block md-button md-raised md-primary" value="Ich finde das mal schnell")
-            pre {{vm.result}}
+
+            div(layout="row" layout-xs="column")
+                include card
+
             md-input-container
                 label Searchables
                 input(ng-model="vm.searchable")
@@ -32,6 +37,3 @@ md-card
                     span Save
 
             pre {{vm.post}}
-
-            md-button(ng-click="vm.dataService()")
-                span service

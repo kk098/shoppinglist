@@ -2,7 +2,6 @@
 
 var _ = require('lodash');
 var Searchable = require('./searchable.model');
-var searchApi = require('../../lib/productSearch/combinedsearch');
 
 // Get list of items
 exports.index = function(req, res) {
