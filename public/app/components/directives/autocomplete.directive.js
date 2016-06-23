@@ -39,7 +39,7 @@
 
                                 if (typeof item.name === 'string') {
                                     result.label = item.name;
-                                    result.value = item.name;
+                                    result.value = item;
 
                                     return result;
                                 }
@@ -61,11 +61,19 @@
                             $log('oh noes: ', err)
                         });
                     },
-                    select: function () {
-                        $timeout(function () {
-                            iElement.trigger('input');
-                        }, 0);
-                    }
+                    select: function (event, ui) {
+                        scope.$apply(function (scope) {
+                            modelAccessor.assign(scope, ui.item);
+                        });
+
+                        if (attrs.onSelect) {
+                            scope.$apply(attrs.onSelect);
+                        }
+
+                        iElement.val(ui.item.label);
+
+                        event.preventDefault();
+                    },
                 });
             };
         }

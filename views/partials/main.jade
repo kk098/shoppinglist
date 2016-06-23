@@ -11,12 +11,12 @@ md-card
                             div(ng-message="required") Du musst schon was eintragen.
                             div(ng-message="min") Die Zahl muss mindestens 1 sein.
                         //div(layout="row" layout-xs="column")
-                    md-input-container(flex="50")
+                    md-input-container(flex="45")
                         label Suche
                         input(required, autocomplete, name="name", ng-model="vm.searchPara.name")
                         div(ng-messages="inputForm.name.$error")
                             div(ng-message="required") Du musst schon was eintragen.
-                    md-input-container(flex="30")
+                    md-input-container(flex="35")
                         label Kategorie
                         md-select(required, name="category", ng-model="vm.searchPara.category")
                             md-option(ng-repeat="unit in vm.categories", value="{{unit.value}}") {{unit.name}}
