@@ -20,6 +20,7 @@
     "angular-ui-router": "^0.3.0",
     "angular-material": "^1.0.9",
     "bootstrap": "^3.3.6",
-    "material-design-icons": "^2.2.3"
+    "material-design-icons": "^2.2.3",
+    "jquery-ui": "^1.11.4"
   }
 }
