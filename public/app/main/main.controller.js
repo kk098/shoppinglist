@@ -14,19 +14,18 @@
         vm.submitted = false;
         vm.showResult = false;
         vm.newItem = {};
+
+        vm.categories = [
+            {name: "Lebensmittel", value: "lebensmittel"},
+            {name: "Hygieneartikel", value: "hygieneartikel"}
+        ];
         vm.searchPara = {
             amount: 1,
-            unit: "stk"
+            category: vm.categories[0].value
         };
-        vm.unitList = [
-            {name: "Stück", value:"stk"},
-            {name: "Kilogramm", value:"kg"},
-            {name: "Milliliter", value:"ml"},
-            {name: "Liter", value:"l"},
-            {name: "Pack", value:"p"}
-        ];
         vm.result = [];
         vm.top = data.getTop();
+        vm.list = data.getList();
 
         vm.chipClick = function (item) {
             vm.searchPara.name = item.name;
@@ -48,6 +47,9 @@
         };
 
         vm.saveItem = function () {
+
+
+            // data.save();
           console.log(vm.result);
         };
 

@@ -6,7 +6,7 @@ var searchApi = require('../../lib/productSearch/combinedsearch');
 
 // Get list of items
 exports.index = function(req, res) {
-    Item.find(function (err, items) {
+    Item.find(req.query, function (err, items) {
         if (err) { return handleError(res, err); }
 
         return res.status(200).json(items);

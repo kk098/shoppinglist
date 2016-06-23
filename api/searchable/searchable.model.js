@@ -8,7 +8,10 @@ var SearchableSchema = new Schema({
     category: {
         type: String,
         default: "uncategorized"
-    }
+    },
+    aliases: [
+        { name: String }
+    ]
 });
 
 module.exports = mongoose.model('Searchable', SearchableSchema);

@@ -6,10 +6,17 @@ var mongoose = require('mongoose'),
 var ItemSchema = new Schema({
     name: String,
     amount: Number,
-    unit: String,
+    category: String,
+    status: {
+        type: Number,
+        default: 0
+    },
     count: {
         type: Number,
         default: 1
+    },
+    created: {
+        type : Date, default: Date.now
     },
     info: {
         rewe: [{
