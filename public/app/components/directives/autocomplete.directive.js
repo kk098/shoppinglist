@@ -41,6 +41,8 @@
                                     result.label = item.name;
                                     result.value = item;
 
+                                    console.log(item);
+
                                     return result;
                                 }
 

@@ -27,8 +27,15 @@ exports.top = function(req, res) {
 
 exports.create = function(req, res) {
     console.log(req.body);
+    var keyword = '';
+
+    if (req.body.object.label) {
+        keyword = req.body.object.label;
+    } else {
+        keyword = req.body.object;
+    }
     
-    var result = searchApi.search(req.body.searchString);
+    var result = searchApi.search(keyword);
 
     return res.status(200).json(result);
 };
