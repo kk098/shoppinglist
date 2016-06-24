@@ -18,32 +18,13 @@ var ItemSchema = new Schema({
     created: {
         type : Date, default: Date.now
     },
-    info: {
-        rewe: [{
-            title: String,
-            price: Number,
-            ppu: String,
-            link: String
-        }],
-        amazon: [{
-            title: String,
-            price: Number,
-            ppu: String,
-            link: String
-        }],
-        lebensmittel: [{
-            title: String,
-            price: Number,
-            ppu: String,
-            link: String
-        }],
-        custom: [{
-            title: String,
-            price: Number,
-            ppu: String,
-            link: String
-        }]
-    }
+    items: [{
+        title: String,
+        price: Number,
+        ppu: String,
+        url: String,
+        vendor: String
+    }]
 });
 
 module.exports = mongoose.model('Item', ItemSchema);

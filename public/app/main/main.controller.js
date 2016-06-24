@@ -55,23 +55,10 @@
         
         
         vm.validate = function () {
-            var data = { amount: 1,
-                category: 'lebensmittel',
-                object: {
-                    label: 'Milch',
-                    value: {
-                        _id: '576518c982c5da5c4ad9a09a',
-                        name: 'Milch',
-                        __v: 0,
-                        aliases: [],
-                        category: 'uncategorized'
-                    }
-                }
-            };
-
-
             $http.post('/api/validation', vm.search).then(function (res) {
                 console.log(res.data);
+                data.saveItem(res.data[0]);
+
             }, function (err) {
                 console.log(err);
             });

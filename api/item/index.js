@@ -7,6 +7,8 @@ var router = express.Router();
 
 router.get('/', controller.index);
 
+router.get('/:id', controller.show);
+
 router.get('/top', controller.top);
 
 router.post('/', controller.create);
