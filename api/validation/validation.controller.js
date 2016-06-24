@@ -63,11 +63,19 @@ function _buildSearch(data) {
                 results.push(keyword);
             });
         }
+
+        _startSearch(results);
+
     } else {
-        results.push(data.object);
+        var check = validation.validateSpelling(data.object);
+
+        check.then(function (res) {
+            results.push(res);
+
+            _startSearch(results);
+        });
     }
 
-    _startSearch(results);
 
     return results
 }
