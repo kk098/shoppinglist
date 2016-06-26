@@ -5,49 +5,63 @@
         .module('listieMcListface')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['$http', '$log', 'dataservice'];
+    MainController.$inject = ['$http', '$log', 'data'];
 
-    function MainController($http, $log, dataservice) {
+    function MainController($http, $log, data) {
         $log.debug('MainController loaded');
         var vm = this;
 
         vm.submitted = false;
+        vm.showResult = false;
         vm.newItem = {};
-        vm.searchPara = {
+
+        vm.categories = [
+            {name: "Lebensmittel", value: "lebensmittel"},
+            {name: "Hygieneartikel", value: "hygieneartikel"}
+        ];
+        vm.search = {
             amount: 1,
-            unit: "stk"
+            category: vm.categories[0].value
         };
-        vm.unitList = [
-            {name: "Stück", value:"stk"},
-            {name: "Kilogramm", value:"kg"},
-            {name: "Milliliter", value:"ml"},
-            {name: "Liter", value:"l"},
-            {name: "Pack", value:"p"}
-        ];
         vm.result = [];
-        vm.top = [
-            {count: 3, name: "Milch"},
-            {count: 32, name: "Kartoffeln"},
-            {count: 2, name: "Bier"},
-            {count: 6, name: "Brot"},
-            {count: 9, name: "Mandeln"},
-            {count: 2, name: "Apfel"},
-            {count: 7, name: "Dings"},
-            {count: 33, name: "Uran"}
-        ];
+        vm.top = data.getTop();
+        vm.list = data.getList();
+
+        vm.chipClick = function (item) {
+            vm.search.object = item;
+        };
 
         vm.post = function(form) {
             vm.submitted = true;
 
             if(form.$valid) {
-                $http.post('/api/items', {searchString: vm.searchPara.name}).then(function(res) {
+                $http.post('/api/items', vm.search).then(function (res) {
                     vm.result = res.data;
+                    vm.showResult = true;
+                }, function (err) {
+                    console.log(err);
                 });
             }
         };
 
         vm.getVendor = function (string) {
           return string.split(": ")[0];
+        };
+
+        vm.saveItem = function () {
+            // data.save();
+          console.log(vm.result);
+        };
+        
+        
+        vm.validate = function () {
+            $http.post('/api/validation', vm.search).then(function (res) {
+                console.log(res.data);
+                data.saveItem(res.data[0]);
+
+            }, function (err) {
+                console.log(err);
+            });
         };
 
         //TODO: remove when searchable crawler finished

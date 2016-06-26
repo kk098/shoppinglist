@@ -5,9 +5,9 @@
         .module('listieMcListface')
         .directive('autocomplete', autocomplete);
 
-    autocomplete.$inject = ['$timeout', 'dataservice', '$parse', '$http', '$interpolate'];
+    autocomplete.$inject = ['$timeout', 'data', '$parse', '$http', '$interpolate'];
 
-    function autocomplete($timeout, dataservice, $parse, $http, $interpolate) {
+    function autocomplete($timeout, data, $parse, $http, $interpolate) {
         /**
          * @desc autocomplete directive
          * @example <div autocomplete things="vm.model"></div>
@@ -33,13 +33,15 @@
                 iElement.autocomplete({
                     source: function (request, response) {
 
-                        dataservice.getMatching(request.term).then(function (res) {
+                        data.getMatching(request.term).then(function (res) {
                             mappedItems = $.map(res, function (item) {
                                 var result = {};
 
                                 if (typeof item.name === 'string') {
                                     result.label = item.name;
-                                    result.value = item.name;
+                                    result.value = item;
+
+                                    console.log(item);
 
                                     return result;
                                 }
@@ -61,11 +63,19 @@
                             $log('oh noes: ', err)
                         });
                     },
-                    select: function () {
-                        $timeout(function () {
-                            iElement.trigger('input');
-                        }, 0);
-                    }
+                    select: function (event, ui) {
+                        scope.$apply(function (scope) {
+                            modelAccessor.assign(scope, ui.item);
+                        });
+
+                        if (attrs.onSelect) {
+                            scope.$apply(attrs.onSelect);
+                        }
+
+                        iElement.val(ui.item.label);
+
+                        event.preventDefault();
+                    },
                 });
             };
         }

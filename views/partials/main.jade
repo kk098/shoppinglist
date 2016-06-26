@@ -1,35 +1,46 @@
 md-card
     md-card-content
         md-content
-            pre {{vm.searchPara}}
+            md-button(ng-click="vm.validate()" class="md-block md-button md-raised md-primary") Validate
+            pre {{vm.search}}
             form(name="inputForm" ng-submit="vm.post(inputForm)" novalidate)
                 div(layout="row")
                     md-input-container(flex="20")
                         label Amount
-                        input(required, name="amount", ng-model="vm.searchPara.amount", type="number", min="1")
+                        input(required, name="amount", ng-model="vm.search.amount", type="number", min="1")
                         div(ng-messages="inputForm.amount.$error")
-                            div(ng-message="required") Du musst schon was eintragen, Junge.
+                            div(ng-message="required") Du musst schon was eintragen.
                             div(ng-message="min") Die Zahl muss mindestens 1 sein.
                         //div(layout="row" layout-xs="column")
-                        include chip
-                    md-input-container(flex="60")
+                    md-input-container(flex="45")
                         label Suche
-                        input(required, autocomplete, name="name", ng-model="vm.searchPara.name")
+                        input(required, autocomplete, name="name", ng-model="vm.search.object")
                         div(ng-messages="inputForm.name.$error")
-                            div(ng-message="required") Du musst schon was eintragen, Junge.
-                    md-input-container(flex="20")
-                        label Unit
-                        md-select(required, name="unit", ng-model="vm.searchPara.unit")
-                            md-option(ng-repeat="unit in vm.unitList", value="{{unit.value}}") {{unit.name}}
+                            div(ng-message="required") Du musst schon was eintragen.
+                    md-input-container(flex="35")
+                        label Kategorie
+                        md-select(required, name="category", ng-model="vm.search.category")
+                            md-option(ng-repeat="unit in vm.categories", value="{{unit.value}}") {{unit.name}}
                         div(ng-messages="inputForm.unit.$error")
-                            div(ng-message="required") Du musst schon was eintragen, Junge.
+                            div(ng-message="required") Du musst schon was eintragen.
+                div(layout="row")
+                    include chip
                 div(layout="row")
                     md-input-container
                         input(type="submit", aria-label="Submit" class="md-block md-button md-raised md-primary" value="Ich finde das mal schnell")
 
+md-card(ng-show="vm.showResult")
+    md-card-content
+        md-content
             div(layout="row" layout-xs="column")
                 include card
 
+            div(layout="row" layout-xs="column")
+                md-button(ng-click="vm.saveItem()" class="md-block md-button md-raised md-primary") Save
+
+md-card
+    md-card-content
+        md-content
             md-input-container
                 label Searchables
                 input(ng-model="vm.searchable")

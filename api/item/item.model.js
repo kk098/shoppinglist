@@ -6,33 +6,25 @@ var mongoose = require('mongoose'),
 var ItemSchema = new Schema({
     name: String,
     amount: Number,
-    unit: String,
+    category: String,
+    status: {
+        type: Number,
+        default: 0
+    },
     count: {
         type: Number,
         default: 1
     },
-    info: {
-        rewe: [{
-            title: String,
-            price: Number,
-            ppu: String
-        }],
-        amazon: [{
-            title: String,
-            price: Number,
-            ppu: String
-        }],
-        lebensmittel: [{
-            title: String,
-            price: Number,
-            ppu: String
-        }],
-        custom: [{
-            title: String,
-            price: Number,
-            ppu: String
-        }]
-    }
+    created: {
+        type : Date, default: Date.now
+    },
+    items: [{
+        title: String,
+        price: Number,
+        ppu: String,
+        url: String,
+        vendor: String
+    }]
 });
 
 module.exports = mongoose.model('Item', ItemSchema);
