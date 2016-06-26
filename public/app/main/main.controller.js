@@ -45,9 +45,9 @@
             }
         };
 
-        vm.saveItem = function () {
-            data.saveItem(vm.item);
-            console.log(vm.result);
+        vm.saveItem = function (item) {
+            data.saveItem(item);
+            console.log(item);
         };
 
         //TODO: remove when searchable crawler finished
