@@ -1,10 +1,11 @@
 md-list
     md-list-item(ng-repeat="product in vm.item.items | orderBy: '-used'")
-        div(class="md-list-item-text" ng-class="vm.indicator(product.status)")
+        div(class="box" ng-class="vm.indicator(product.used)")
+        div(class="md-list-item-text")
             h3
                 a(href="{{product.url}}" target="_blank") {{product.title}}
             p {{product.price}}
-            p {{product.used}}
+            //p {{product.used}}
             md-button(ng-click="vm.saveItem(product)" class="md-block md-button md-raised md-primary") Save
-            pre {{product}}
+            //pre {{product}}
             md-divider(ng-if="!$last")

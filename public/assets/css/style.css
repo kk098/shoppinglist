@@ -7,16 +7,26 @@ a {
 }
 
 .red {
-    opacity: 0.4;
-    background-color: red;
+    background-color: #f44336;
 }
 
 .yellow {
-    opacity: 0.4;
-    background-color: yellow;
+    background-color: #ffc107;
 }
 
 .green {
+    background-color: #4caf50;
+}
+
+.box {
     opacity: 0.4;
-    background-color: green;
+    position: absolute;
+    width: 20px;
+    height: calc(100% - 10px);
+    right: 5px;
+    top: 5px;
+}
+
+md-list {
+    width: 100%;
 }
