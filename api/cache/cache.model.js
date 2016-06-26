@@ -11,6 +11,7 @@ var CacheSchema = new Schema({
         type: Number,
         default: 0
     },
+    avgPrice: String,
     count: {
         type: Number,
         default: 1

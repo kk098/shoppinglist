@@ -20,24 +20,34 @@ exports.validate = function(req, res) {
     }
 
     check.then(function (checkedName) {
+
+        // if (typeof req.body.object === 'string') {
+        //     req.body.object = checkedName
+        // } else {
+        //     req.body.object.label = checkedName;
+        // }
+
         Cache.findOne({name: checkedName}, function (err, cache) {
             if (err) return handleError(err);
             
             if (cache) {
-                console.log(name + ' im cache gefunden.');
+                console.log(checkedName + ' im cache gefunden.');
+
                 return res.status(200).json(cache);
             } else {
-                console.log('nichts im cache gefunden. Starte crawler');
+                console.log(checkedName + ' nicht im cache gefunden. Starte crawler');
                 var builtArray = _buildArray(req.body);
                 builtArray.then(function (data) {
                     var validated = _startValidation(data, req.body);
-                    // validated.name = checkedName;
+                    validated.name = checkedName;
+
+                    console.log(validated);
 
                     // save validated search in cache collection
                     Cache.create(validated, function(err, cache) {
                         if(err) { return handleError(res, err); }
 
-                        console.log(cache, 'erstellt');
+                        console.log(cache.name, 'erstellt');
                     });
 
                     return res.status(200).json(validated);
