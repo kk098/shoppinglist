@@ -26,12 +26,17 @@
         };
         vm.result = [];
         vm.top = data.getTop();
-        vm.list = data.getList();
+        data.getList().then(function (res) {
+            vm.list = res;
+        });
+
 
         vm.chipClick = function (item) {
             vm.search.object = item;
         };
 
+        
+        // start search with params
         vm.find = function(form) {
             vm.submitted = true;
 
@@ -45,8 +50,19 @@
             }
         };
 
+        // saves crawled item in list
         vm.saveItem = function (item) {
             data.saveItem(item);
+            vm.list.push(item);
+            
+            console.log(item);
+        };
+
+        // remove item from list
+        vm.deleteItem = function (item, index) {
+            data.deleteItem(item);
+            vm.list.splice(index, 1);
+
             console.log(item);
         };
 

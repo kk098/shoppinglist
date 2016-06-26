@@ -1,0 +1,8 @@
+md-list
+    md-list-item(ng-repeat="thing in vm.list")
+        div(class="md-list-item-text")
+            h3
+                a(href="{{thing.url}}" target="_blank") {{thing.title}}
+            p {{thing.price}}
+            md-button(ng-click="vm.deleteItem(thing, $index)" class="md-block md-button md-raised md-primary") Delete
+            md-divider(ng-if="!$last")

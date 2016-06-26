@@ -12,7 +12,7 @@ form(name="inputForm2" ng-submit="vm.saveSearchable(inputForm2)" novalidate)
             div(ng-messages="inputForm2.category.$error")
                 div(ng-message="required") Du musst schon was eintragen.
         md-input-container(flex="100")
-            label Kategorie
+            label Aliases
             input(required, name="aliases", ng-model="vm.searchable.aliases")
             div(ng-messages="inputForm2.aliases.$error")
                 div(ng-message="required") Du musst schon was eintragen.

@@ -13,7 +13,8 @@
             getMatching: getMatching,
             getTop: getTop,
             getList: getList,
-            saveItem: saveItem
+            saveItem: saveItem,
+            deleteItem: deleteItem
         };
 
         function getSearchables() {
@@ -45,9 +46,7 @@
         }
 
         function getList() {
-            return $http.get('/api/items/', {
-                params: {status: 1}
-            })
+            return $http.get('/api/items/')
                 .then(getComplete)
                 .catch(getFailed);
 
@@ -100,6 +99,20 @@
 
             function saveFailed(error) {
                 $log.error('XHR Failed for saveItem.' + error.data);
+            }
+        }
+
+        function deleteItem(item) {
+            return $http.delete('/api/items/' + item._id)
+                .then(deleteComplete)
+                .catch(deleteFailed);
+
+            function deleteComplete(res) {
+                return res.data;
+            }
+
+            function deleteFailed(error) {
+                $log.error('XHR Failed for deleteItem.' + error.data);
             }
         }
     }

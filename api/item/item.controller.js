@@ -6,7 +6,7 @@ var searchApi = require('../../lib/productSearch/combinedsearch');
 
 // Get list of items
 exports.index = function(req, res) {
-    Item.find(req.query, '-items ', function (err, items) {
+    Item.find(req.query, function (err, items) {
         if (err) { return handleError(res, err); }
 
         return res.status(200).json(items);
@@ -19,6 +19,19 @@ exports.show = function(req, res) {
         if (err) { return handleError(res, err); }
 
         return res.status(200).json(item);
+    });
+};
+
+// Get one items
+exports.delete = function(req, res) {
+    Item.findById(req.params.id, function (err, item) {
+        if (err) { return handleError(res, err); }
+
+        item.remove(function(err) {
+            if (err) { return handleError(res, err); }
+
+            return res.send(204);
+        });
     });
 };
 
