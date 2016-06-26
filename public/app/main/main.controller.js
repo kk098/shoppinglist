@@ -35,6 +35,20 @@
             vm.search.object = item;
         };
 
+        vm.indicator = function (status) {
+            if (status == 0 ) {
+                return 'red'
+            }
+
+            if (status == 1 ) {
+                return 'yellow'
+            }
+
+            if (status == 2 ) {
+                return 'green'
+            }
+        };
+
         
         // start search with params
         vm.find = function(form) {
