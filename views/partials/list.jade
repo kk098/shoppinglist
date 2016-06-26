@@ -1,6 +1,6 @@
 md-list
     md-list-item(ng-repeat="product in vm.item.items | orderBy: '-used'")
-        div(class="md-list-item-text")
+        div(class="md-list-item-text" ng-class="vm.indicator(product.status)")
             h3
                 a(href="{{product.url}}" target="_blank") {{product.title}}
             p {{product.price}}

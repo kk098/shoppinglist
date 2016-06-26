@@ -5,3 +5,18 @@ body {
 a {
   color: #00B7FF;
 }
+
+.red {
+    opacity: 0.4;
+    background-color: red;
+}
+
+.yellow {
+    opacity: 0.4;
+    background-color: yellow;
+}
+
+.green {
+    opacity: 0.4;
+    background-color: green;
+}
