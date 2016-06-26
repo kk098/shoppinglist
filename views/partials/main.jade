@@ -1,7 +1,6 @@
 md-card
     md-card-content
         md-content
-            md-button(ng-click="vm.saveItem()" class="md-block md-button md-raised md-primary") Save Item
             pre {{vm.search}}
             pre {{vm.item}}
             form(name="inputForm" ng-submit="vm.find(inputForm)" novalidate)
@@ -24,7 +23,7 @@ md-card
                             md-option(ng-repeat="unit in vm.categories", value="{{unit.value}}") {{unit.name}}
                         div(ng-messages="inputForm.unit.$error")
                             div(ng-message="required") Du musst schon was eintragen.
-                div(layout="row")
+                //div(layout="row")
                     include chip
                 div(layout="row")
                     md-input-container
@@ -51,6 +50,8 @@ md-card()
                 include myList
 
 md-card
+    md-card-title
+        h2 Searchables
     md-card-content
         md-content
             include searchable
