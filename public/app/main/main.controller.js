@@ -72,7 +72,7 @@
             vm.submitted2 = true;
 
             if(form.$valid) {
-                vm.searchable.aliases = vm.searchable.aliases.split(',');
+                vm.searchable.aliases = vm.searchable.aliases.split(',').trim();
 
                 $http.post('/api/searchables', vm.searchable).then(function(res) {
                     $log.debug(res);
