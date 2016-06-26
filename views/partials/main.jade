@@ -1,8 +1,10 @@
 md-card
     md-card-content
         md-content
-            md-button(ng-click="vm.validate()" class="md-block md-button md-raised md-primary") Validate
+            md-button(ng-click="vm.validate()" class="md-block md-button md-raised md-primary") Find
+            md-button(ng-click="vm.saveItem()" class="md-block md-button md-raised md-primary") Save Item
             pre {{vm.search}}
+            pre {{vm.item}}
             form(name="inputForm" ng-submit="vm.post(inputForm)" novalidate)
                 div(layout="row")
                     md-input-container(flex="20")
