@@ -1,0 +1,24 @@
+form(name="inputForm2" ng-submit="vm.saveSearchable(inputForm2)" novalidate)
+    div(layout="column")
+        md-input-container(flex="100")
+            label Name
+            input(required, name="name", ng-model="vm.searchable.name")
+            div(ng-messages="inputForm2.name.$error")
+                div(ng-message="required") Du musst schon was eintragen.
+        md-input-container(flex="100")
+            label Kategorie
+            md-select(required, name="category", ng-model="vm.searchable.category")
+                md-option(ng-repeat="unit in vm.categories", value="{{unit.value}}") {{unit.name}}
+            div(ng-messages="inputForm2.category.$error")
+                div(ng-message="required") Du musst schon was eintragen.
+        md-input-container(flex="100")
+            label Kategorie
+            input(required, name="aliases", ng-model="vm.searchable.aliases")
+            div(ng-messages="inputForm2.aliases.$error")
+                div(ng-message="required") Du musst schon was eintragen.
+
+        div(layout="row")
+            md-input-container
+                input(type="submit", aria-label="Submit" class="md-block md-button md-raised md-primary" value="Searchable Speichern")
+
+pre {{vm.post}}

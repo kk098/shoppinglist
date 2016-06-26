@@ -9,16 +9,16 @@ var Item = require('../item/item.model');
 exports.validate = function(req, res) {
     console.log(req.body);
 
-    // var dbItem;
-    //
-    // var name = (typeof req.body.object === 'string' ? req.body.object : req.body.object.label);
-    // Item.findOne({name: name.toLowerCase()}, function (err, item) {
-    //     if (err) return handleError(err);
-    //
-    //     dbItem = item;
-    //
-    //     console.log(dbItem);
-    // });
+    var dbItem;
+
+    var name = (typeof req.body.object === 'string' ? req.body.object : req.body.object.label);
+    Item.findOne({name: name.toLowerCase()}, function (err, item) {
+        if (err) return handleError(err);
+
+        dbItem = item;
+
+        console.log(dbItem);
+    });
 
 
     var builtArray = _buildArray(req.body);

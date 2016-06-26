@@ -51,12 +51,20 @@
         };
 
         //TODO: remove when searchable crawler finished
-        vm.searchable = "";
-        vm.postSearchable = function () {
-            $http.post('/api/searchables', {name: vm.searchable}).then(function(res) {
-                $log.debug(res);
-                vm.post = res.data;
-            });
+        vm.searchable = {};
+        vm.saveSearchable = function (form) {
+            vm.submitted2 = true;
+
+            if(form.$valid) {
+                vm.searchable.aliases = vm.searchable.aliases.split(',');
+
+                $http.post('/api/searchables', vm.searchable).then(function(res) {
+                    $log.debug(res);
+                    vm.post = res.data;
+                }, function (err) {
+                    $log.debug(res);
+                });
+            }
         };
     }
 })();
