@@ -5,20 +5,13 @@ var defer = require("node-promise").defer;
 var searchApi = require('../../lib/productSearch/combinedsearch');
 var validation = require('../../lib/validation/validation');
 var Item = require('../item/item.model');
+var Cache = require('../cache/cache.model');
 
 exports.validate = function(req, res) {
     console.log(req.body);
 
-    // var name = (typeof req.body.object === 'string' ? req.body.object : req.body.object.label);
-    // var check = validation.validateSpelling(name);
-    //
-    // check.then(function (res) {
-    //     Item.findOne({name: res}, function (err, item) {
-    //         if (err) return handleError(err);
-    //
-    //         console.log(item);
-    //     });
-    // });
+    var name = (typeof req.body.object === 'string' ? req.body.object : req.body.object.label);
+    var check = validation.validateSpelling(name);
 
     if (req.body.category === '' || req.body.category === 'undefined' || !req.body.category) {
         if (req.body.object.value.category) {
@@ -26,11 +19,31 @@ exports.validate = function(req, res) {
         }
     }
 
-    var builtArray = _buildArray(req.body);
-    builtArray.then(function (data) {
-        var validated = _startValidation(data, req.body);
+    check.then(function (checkedName) {
+        Cache.findOne({name: checkedName}, function (err, cache) {
+            if (err) return handleError(err);
+            
+            if (cache) {
+                console.log(name + ' im cache gefunden.');
+                return res.status(200).json(cache);
+            } else {
+                console.log('nichts im cache gefunden. Starte crawler');
+                var builtArray = _buildArray(req.body);
+                builtArray.then(function (data) {
+                    var validated = _startValidation(data, req.body);
+                    // validated.name = checkedName;
 
-        return res.status(200).json(validated);
+                    // save validated search in cache collection
+                    Cache.create(validated, function(err, cache) {
+                        if(err) { return handleError(res, err); }
+
+                        console.log(cache, 'erstellt');
+                    });
+
+                    return res.status(200).json(validated);
+                });
+            }
+        });
     });
 };
 
