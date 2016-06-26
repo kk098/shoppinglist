@@ -44,10 +44,4 @@ md-card(ng-show="vm.showResult" )
 md-card
     md-card-content
         md-content
-            md-input-container
-                label Searchables
-                input(ng-model="vm.searchable")
-                md-button(ng-click="vm.postSearchable()")
-                    span Save
-
-            pre {{vm.post}}
+            include searchable
