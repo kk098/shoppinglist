@@ -1,8 +1,9 @@
 md-list
-    md-list-item(ng-repeat="product in vm.item.items")
+    md-list-item(ng-repeat="product in vm.item.items | orderBy: 'status'")
         div(class="md-list-item-text")
             h3
                 a(href="{{product.url}}" target="_blank") {{product.title}}
             p {{product.price}}
             md-button(ng-click="vm.saveItem(product)" class="md-block md-button md-raised md-primary") Save
+            pre {{product}}
             md-divider(ng-if="!$last")

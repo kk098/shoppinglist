@@ -30,9 +30,13 @@ md-card
                     md-input-container
                         input(type="submit", aria-label="Submit" class="md-block md-button md-raised md-primary" value="Ich finde das mal schnell")
 
-md-card(ng-show="vm.showResult" )
-    md-card-title
-        h2 {{vm.item.name}}
+md-card(ng-show="vm.showResult")
+    md-card
+        md-card-title
+            h2 {{vm.item.name}}
+        md-card-content
+            md-content
+                p {{vm.item.amount}} // {{vm.item.avgPrice}} // {{vm.item.category}}
     md-card-content
         md-content
             div(layout="row" layout-xs="column")
