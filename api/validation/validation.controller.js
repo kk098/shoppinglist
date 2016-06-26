@@ -1,16 +1,27 @@
 'use strict';
 
 var _ = require('lodash');
+var defer = require("node-promise").defer;
 var searchApi = require('../../lib/productSearch/combinedsearch');
 var validation = require('../../lib/validation/validation');
+var Item = require('../item/item.model');
 
 exports.validate = function(req, res) {
     console.log(req.body);
-    var result = {};
 
-    var result = _buildArray(req.body);
+    // var name = (typeof reqBody.object === 'string' ? reqBody.object : reqBody.object.label);
+    // Item.findOne({name: name.toLowerCase()}, function (err, item) {
+    //     if (err) return handleError(err);
+    //
+    //     return res.status(200).json(item);
+    // });
 
-    return res.status(200).json(result);
+    var builtArray = _buildArray(req.body);
+    builtArray.then(function (data) {
+        var validated = _startValidation(data, req.body);
+
+        return res.status(200).json(validated);
+    });
 };
 
 
@@ -19,9 +30,10 @@ function handleError(res, err) {
 }
 
 function _buildArray(data) {
-    console.log('_buildSearch');
+    console.log('_buildArray');
 
     var results = [];
+    var deferred = defer();
 
     if (data.object.label && typeof data.object.label === 'string') {
         results.push(data.object.label);
@@ -32,7 +44,7 @@ function _buildArray(data) {
             });
         }
 
-        return _startSearch(results);
+        deferred.resolve(_startSearch(results));
 
     } else {
         var check = validation.validateSpelling(data.object);
@@ -40,12 +52,11 @@ function _buildArray(data) {
         check.then(function (res) {
             results.push(res);
 
-            return _startSearch(results);
+            deferred.resolve(_startSearch(results));
         });
     }
 
-
-    return results
+    return deferred;
 }
 
 function _startSearch(keywords) {
@@ -73,8 +84,9 @@ function _startSearch(keywords) {
         });
     });
 
-    results = validation.validateProducts(results);
-
     return results
+}
 
+function _startValidation(items, meta) {
+    return validation.validateProducts(items, meta);
 }

@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var ItemSchema = new Schema({
-    name: String,
+    name   : { type: String, lowercase: true, trim: true },
     amount: Number,
     category: String,
     status: {
@@ -18,13 +18,7 @@ var ItemSchema = new Schema({
     created: {
         type : Date, default: Date.now
     },
-    items: [{
-        title: String,
-        price: Number,
-        ppu: String,
-        url: String,
-        vendor: String
-    }]
+    items: []
 });
 
 module.exports = mongoose.model('Item', ItemSchema);

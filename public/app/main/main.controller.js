@@ -14,6 +14,7 @@
         vm.submitted = false;
         vm.showResult = false;
         vm.newItem = {};
+        vm.item = {};
 
         vm.categories = [
             {name: "Lebensmittel", value: "lebensmittel"},
@@ -49,16 +50,14 @@
         };
 
         vm.saveItem = function () {
-            // data.save();
-          console.log(vm.result);
+            data.saveItem(vm.item);
+            console.log(vm.result);
         };
         
         
         vm.validate = function () {
             $http.post('/api/validation', vm.search).then(function (res) {
-                console.log(res.data);
-                data.saveItem(res.data[0]);
-
+                vm.item = res.data;
             }, function (err) {
                 console.log(err);
             });
