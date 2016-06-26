@@ -18,7 +18,8 @@
 
         vm.categories = [
             {name: "Lebensmittel", value: "lebensmittel"},
-            {name: "Hygieneartikel", value: "hygieneartikel"}
+            {name: "Hygieneartikel", value: "hygieneartikel"},
+            {name: "Haushaltsartikel", value: "haushaltsartikel"}
         ];
         vm.search = {
             amount: 1,
