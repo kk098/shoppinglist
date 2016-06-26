@@ -4,5 +4,7 @@ md-list
             h3
                 a(href="{{thing.url}}" target="_blank") {{thing.title}}
             p {{thing.price}}
-            md-button(ng-click="vm.deleteItem(thing, $index)" class="md-block md-button md-raised md-primary") Delete
+            span {{thing.usedPrice}}
+            span {{thing.pricePerUnit}}
+            md-button(ng-click="vm.deleteItem(thing, $index)" class="md-block md-button md-raised md-primary button-right") Delete
             md-divider(ng-if="!$last")

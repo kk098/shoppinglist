@@ -30,3 +30,9 @@ a {
 md-list {
     width: 100%;
 }
+
+.button-right {
+    position: absolute;
+    right: 30px;
+    bottom: 5px;
+}
