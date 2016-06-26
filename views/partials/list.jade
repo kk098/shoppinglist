@@ -2,7 +2,7 @@ md-list
     md-list-item(ng-repeat="product in vm.item.items")
         div(class="md-list-item-text")
             h3
-                a(href="{{product.url}}") {{product.title}}
+                a(href="{{product.url}}" target="_blank") {{product.title}}
             p {{product.price}}
             md-button(ng-click="vm.saveItem(product)" class="md-block md-button md-raised md-primary") Save
             md-divider(ng-if="!$last")

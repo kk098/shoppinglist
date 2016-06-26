@@ -9,8 +9,6 @@ var Item = require('../item/item.model');
 exports.validate = function(req, res) {
     console.log(req.body);
 
-    // var dbItem;
-    //
     // var name = (typeof req.body.object === 'string' ? req.body.object : req.body.object.label);
     // var check = validation.validateSpelling(name);
     //
@@ -18,12 +16,15 @@ exports.validate = function(req, res) {
     //     Item.findOne({name: res}, function (err, item) {
     //         if (err) return handleError(err);
     //
-    //         dbItem = item;
-    //
-    //         console.log(dbItem);
+    //         console.log(item);
     //     });
     // });
 
+    if (req.body.category === '' || req.body.category === 'undefined' || !req.body.category) {
+        if (req.body.object.value.category) {
+            req.body.category = req.body.object.value.category;
+        }
+    }
 
     var builtArray = _buildArray(req.body);
     builtArray.then(function (data) {
@@ -76,6 +77,8 @@ function _buildArray(data) {
     return deferred;
 }
 
+// start crawler with all keywords
+// result is an item array with all crawled proucts
 function _startSearch(keywords) {
     console.log('_startSearch');
 
@@ -107,6 +110,7 @@ function _startSearch(keywords) {
     return results
 }
 
+// validate all crawled products
 function _startValidation(items, meta) {
     return validation.validateProducts(items, meta);
 }
