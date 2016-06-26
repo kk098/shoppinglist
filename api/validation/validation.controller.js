@@ -9,12 +9,17 @@ var Item = require('../item/item.model');
 exports.validate = function(req, res) {
     console.log(req.body);
 
-    // var name = (typeof reqBody.object === 'string' ? reqBody.object : reqBody.object.label);
+    // var dbItem;
+    //
+    // var name = (typeof req.body.object === 'string' ? req.body.object : req.body.object.label);
     // Item.findOne({name: name.toLowerCase()}, function (err, item) {
     //     if (err) return handleError(err);
     //
-    //     return res.status(200).json(item);
+    //     dbItem = item;
+    //
+    //     console.log(dbItem);
     // });
+
 
     var builtArray = _buildArray(req.body);
     builtArray.then(function (data) {
@@ -79,7 +84,7 @@ function _startSearch(keywords) {
                     results.push(item);
                 })
             } else {
-                console.log('itemInformation array is empty or not available')
+                console.log('itemInformation array from: ' + vendorResults.vendor + ' is empty or not available')
             }
         });
     });

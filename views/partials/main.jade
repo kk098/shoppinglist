@@ -1,11 +1,10 @@
 md-card
     md-card-content
         md-content
-            md-button(ng-click="vm.validate()" class="md-block md-button md-raised md-primary") Find
             md-button(ng-click="vm.saveItem()" class="md-block md-button md-raised md-primary") Save Item
             pre {{vm.search}}
             pre {{vm.item}}
-            form(name="inputForm" ng-submit="vm.post(inputForm)" novalidate)
+            form(name="inputForm" ng-submit="vm.find(inputForm)" novalidate)
                 div(layout="row")
                     md-input-container(flex="20")
                         label Amount
@@ -31,11 +30,13 @@ md-card
                     md-input-container
                         input(type="submit", aria-label="Submit" class="md-block md-button md-raised md-primary" value="Ich finde das mal schnell")
 
-md-card(ng-show="vm.showResult")
+md-card(ng-show="vm.showResult" )
+    md-card-title
+        h2 {{vm.item.name}}
     md-card-content
         md-content
             div(layout="row" layout-xs="column")
-                include card
+                include list
 
             div(layout="row" layout-xs="column")
                 md-button(ng-click="vm.saveItem()" class="md-block md-button md-raised md-primary") Save
