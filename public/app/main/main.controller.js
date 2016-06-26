@@ -32,12 +32,12 @@
             vm.search.object = item;
         };
 
-        vm.post = function(form) {
+        vm.find = function(form) {
             vm.submitted = true;
 
             if(form.$valid) {
-                $http.post('/api/items', vm.search).then(function (res) {
-                    vm.result = res.data;
+                $http.post('/api/validation', vm.search).then(function (res) {
+                    vm.item = res.data;
                     vm.showResult = true;
                 }, function (err) {
                     console.log(err);
@@ -45,22 +45,9 @@
             }
         };
 
-        vm.getVendor = function (string) {
-          return string.split(": ")[0];
-        };
-
         vm.saveItem = function () {
             data.saveItem(vm.item);
             console.log(vm.result);
-        };
-        
-        
-        vm.validate = function () {
-            $http.post('/api/validation', vm.search).then(function (res) {
-                vm.item = res.data;
-            }, function (err) {
-                console.log(err);
-            });
         };
 
         //TODO: remove when searchable crawler finished
