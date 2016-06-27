@@ -7,3 +7,5 @@ md-list
             p Preis für {{thing.amount}} x {{thing.name}}: {{thing.avgPrice * thing.amount}}
             md-button(ng-click="vm.deleteItem(thing, $index)" class="md-block md-button md-raised md-primary button-right") Delete
             md-divider(ng-if="!$last")
+
+    h3 Gesamt: ~ {{vm.getComuPrice()}}
