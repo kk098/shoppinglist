@@ -36,3 +36,10 @@ md-list {
     right: 30px;
     bottom: 5px;
 }
+
+.small {
+    font-size: 12px;
+    font-weight: 700;
+    color: #adadad;
+    margin-left: 5px;
+}
