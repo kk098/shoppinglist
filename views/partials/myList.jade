@@ -3,9 +3,9 @@ md-list
         div(class="md-list-item-text")
             h3 {{thing.amount}} x {{thing.name}}
                 span(class="small") {{thing.category}}
-            p Durchschnitt für 1 x {{thing.name}}: {{thing.avgPrice}}
-            p Preis für {{thing.amount}} x {{thing.name}}: {{thing.avgPrice * thing.amount}}
+            p Durchschnitt für 1 x {{thing.name}}: {{thing.avgPrice}} €
+            p Preis für {{thing.amount}} x {{thing.name}}: {{thing.avgPrice * thing.amount}} €
             md-button(ng-click="vm.deleteItem(thing, $index)" class="md-block md-button md-raised md-primary button-right") Delete
             md-divider(ng-if="!$last")
 
-    h3 Gesamt: ~ {{vm.getComuPrice()}}
+    h3 Gesamt: ~ {{vm.getComuPrice()}} €
