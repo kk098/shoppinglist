@@ -5,9 +5,9 @@
         .module('listieMcListface')
         .factory('data', dataservice);
 
-    dataservice.$inject = ['$http', '$log'];
+    dataservice.$inject = ['$http', '$log', '$q'];
 
-    function dataservice($http, $log) {
+    function dataservice($http, $log, $q) {
         return {
             getSearchables: getSearchables,
             getMatching: getMatching,
@@ -32,25 +32,33 @@
         }
 
         function getMatching(string) {
+            //FIXME: naja....
+            var defer = $q.defer();
 
-            // $http.get('/api/caches/match/' + string).then(function (res) {
-            //     if (res.data.length > 0) {
-            //         return $http.get('/api/caches/match/' + string)
-            //             .then(getComplete)
-            //             .catch(getFailed);
-            //     } else {
-            //         return $http.get('/api/searchables/' + string)
-            //             .then(getComplete)
-            //             .catch(getFailed);
-            //     }
-            // });
 
-            return $http.get('/api/searchables/' + string)
-                .then(getComplete)
-                .catch(getFailed);
+            $http.get('/api/caches/match/' + string).then(function (res) {
+                if (res.data.length > 0) {
+                    return $http.get('/api/caches/match/' + string)
+                        .then(getComplete)
+                        .catch(getFailed);
+                } else {
+                    return $http.get('/api/searchables/' + string)
+                        .then(getComplete)
+                        .catch(getFailed);
+                }
+            });
+
+            console.log(defer);
+
+            return defer.promise;
+
+            // return $http.get('/api/searchables/' + string)
+            //     .then(getComplete)
+            //     .catch(getFailed);
 
             function getComplete(res) {
-                return res.data;
+                return defer.resolve(res.data);
+                // return res.data;
             }
 
             function getFailed(error) {
