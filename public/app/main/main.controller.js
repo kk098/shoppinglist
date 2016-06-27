@@ -67,6 +67,8 @@
 
         // saves crawled item in list
         vm.saveItem = function (item) {
+            item.amount = vm.search.amount;
+
             data.saveItem(item);
             vm.list.push(item);
             

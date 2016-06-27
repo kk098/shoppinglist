@@ -4,10 +4,10 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var ItemSchema = new Schema({
-    title   : { type: String, lowercase: true, trim: true },
-    url: String,
-    price: String,
-    pricePerUnit: String,
+    name   : { type: String, lowercase: true, trim: true, default: '' },
+    price: Number,
+    pricePerUnit: Number,
+    avgPrice: Number,
     amount: Number,
     category: String,
     status: {

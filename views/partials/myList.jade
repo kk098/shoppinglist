@@ -1,10 +1,9 @@
 md-list
     md-list-item(ng-repeat="thing in vm.list")
         div(class="md-list-item-text")
-            h3
-                a(href="{{thing.url}}" target="_blank") {{thing.title}}
-            p {{thing.price}}
-            span {{thing.usedPrice}}
-            span {{thing.pricePerUnit}}
+            h3 {{thing.amount}} x {{thing.name}}
+                span(class="small") {{thing.category}}
+            p Durchschnitt für 1 x {{thing.name}}: {{thing.avgPrice}}
+            p Preis für {{thing.amount}} x {{thing.name}}: {{thing.avgPrice * thing.amount}}
             md-button(ng-click="vm.deleteItem(thing, $index)" class="md-block md-button md-raised md-primary button-right") Delete
             md-divider(ng-if="!$last")
