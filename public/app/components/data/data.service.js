@@ -32,6 +32,19 @@
         }
 
         function getMatching(string) {
+
+            // $http.get('/api/caches/match/' + string).then(function (res) {
+            //     if (res.data.length > 0) {
+            //         return $http.get('/api/caches/match/' + string)
+            //             .then(getComplete)
+            //             .catch(getFailed);
+            //     } else {
+            //         return $http.get('/api/searchables/' + string)
+            //             .then(getComplete)
+            //             .catch(getFailed);
+            //     }
+            // });
+
             return $http.get('/api/searchables/' + string)
                 .then(getComplete)
                 .catch(getFailed);
