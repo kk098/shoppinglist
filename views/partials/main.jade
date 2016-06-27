@@ -36,7 +36,7 @@ md-card(ng-show="vm.showResult")
         md-card-content
             md-content
                 p Anzahl: {{vm.search.amount}} // Preis: {{vm.item.avgPrice * vm.search.amount}} € // Durchschnitt: {{vm.item.avgPrice}} € // Kategorie: {{vm.item.category}}
-                md-button(ng-click="vm.saveItem(vm.item)" class="md-block md-button md-raised md-primary button-right") Save
+                md-button(ng-click="vm.saveItem(vm.item)" class="md-block md-button md-raised md-primary") Save
     md-card-content
         md-content
             div(layout="row" layout-xs="column")
