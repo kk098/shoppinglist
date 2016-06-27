@@ -13,6 +13,19 @@ exports.index = function(req, res) {
     });
 };
 
+
+// Get list of matching items
+exports.match = function(req, res) {
+    console.log(req.params);
+
+    Cache.find({name: new RegExp(req.params.string, "i")}, function (err, cache) {
+        if (err) { return handleError(res, err); }
+
+        return res.status(200).json(cache);
+    });
+};
+
+
 // Get one items
 exports.show = function(req, res) {
     Cache.findById(req.params.id, function (err, item) {

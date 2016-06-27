@@ -4,9 +4,9 @@ md-list
         div(class="md-list-item-text")
             h3
                 a(href="{{product.url}}" target="_blank") {{product.title}}
-            p {{product.price}}
-            span {{product.usedPrice}}
-            span {{product.pricePerUnit}}
+            p Preis: {{product.price}}
+            p Verwendeter Preis: {{product.usedPrice}}
+            p PPU: {{product.pricePerUnit}}
             md-button(ng-click="vm.saveItem(product)" class="md-block md-button md-raised md-primary button-right") Save
             //pre {{product}}
             md-divider(ng-if="!$last")
