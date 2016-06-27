@@ -83,6 +83,17 @@
             console.log(item);
         };
 
+        vm.getComuPrice = function () {
+            var result = 0;
+            if (vm.list) {
+                angular.forEach(vm.list, function (item) {
+                    result += item.amount * item.avgPrice;
+                })
+            }
+
+            return result;
+        };
+
         //TODO: remove when searchable crawler finished
         vm.searchable = {};
         vm.saveSearchable = function (form) {
