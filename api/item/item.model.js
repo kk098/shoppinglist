@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var ItemSchema = new Schema({
-    name   : { type: String, lowercase: true, trim: true },
+    name   : { type: String, lowercase: true, trim: true, default: '' },
     price: Number,
     pricePerUnit: Number,
     avgPrice: Number,
