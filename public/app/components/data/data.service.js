@@ -32,9 +32,7 @@
         }
 
         function getMatching(string) {
-            //FIXME: naja....
             var defer = $q.defer();
-
 
             $http.get('/api/caches/match/' + string).then(function (res) {
                 if (res.data.length > 0) {
