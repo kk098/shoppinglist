@@ -27,6 +27,7 @@ exports.validate = function(req, res) {
         //     req.body.object.label = checkedName;
         // }
 
+        // check if keyword is already in the DB
         Cache.findOne({name: checkedName}, function (err, cache) {
             if (err) return handleError(err);
             
@@ -35,9 +36,12 @@ exports.validate = function(req, res) {
 
                 return res.status(200).json(cache);
             } else {
+                // if not, start the whole thing.
                 console.log(checkedName + ' nicht im cache gefunden. Starte crawler');
+                // build masterarray for product search crawler
                 var builtArray = _buildArray(req.body);
                 builtArray.then(function (data) {
+                    // start validator afterwards
                     var validated = _startValidation(data, req.body);
                     validated.name = checkedName;
 
